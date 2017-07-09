@@ -1,0 +1,14 @@
+
+Dumb Components:
+
+1. ItemList: list of items containing arg for item type.
+
+2. Item: Singular item that contains item info (comment, story, job, etc);
+
+3. MenuList: Contains list of Item Types as a menu
+
+4. MenuListItem: Link to ItemList that contains config for ItemList
+
+Containers:
+
+1. Menu: Set list via MenuList of based on content config object.
