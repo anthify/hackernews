@@ -104,7 +104,8 @@ describe("Story", () => {
           });
           expect(expectedActions).toContainEqual({
             type: Oops.STORY,
-            error: mockedError
+            error: mockedError,
+            id: "id"
           });
         });
     });
@@ -146,7 +147,8 @@ describe("Comment", () => {
           });
           expect(expectedActions).toContainEqual({
             type: Oops.COMMENT,
-            error: mockedError
+            error: mockedError,
+            id: "id",
           });
         });
     });
@@ -218,7 +220,8 @@ describe("Job", () => {
         });
         expect(expectedActions).toContainEqual({
           type: Oops.JOB,
-          error: mockedError
+          error: mockedError,
+          id: "id"
         });
       });
     });

@@ -59,9 +59,10 @@ export const fetchedItem = (type, item) => ({
   item
 });
 
-export const oopsItem = (type, error) => ({
+export const oopsItem = (type, error, id) => ({
   type,
-  error
+  error,
+  id
 });
 
 export const fetchItem = (type, id) => {
@@ -72,6 +73,6 @@ export const fetchItem = (type, id) => {
     return fetch(API.item(id))
       .then(response => response.json())
       .then(item => dispatch(fetchedItem(fetchedType, item)))
-      .catch(err => dispatch(oopsItem(oopsType, err)));
+      .catch(err => dispatch(oopsItem(oopsType, err, id)));
   };
 };
