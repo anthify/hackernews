@@ -1,5 +1,5 @@
 import "whatwg-fetch";
-import { Fetching, Fetched, Oops, API } from "../constants/";
+import { Fetching, Fetched, Oops, API, UI } from "../constants/";
 
 export const fetchingNews = () => ({
   type: Fetching.NEWS
@@ -76,3 +76,7 @@ export const fetchItem = (type, id) => {
       .catch(err => dispatch(oopsItem(oopsType, err, id)));
   };
 };
+
+export const addVisibleStories = number => ({
+  type: UI.ADD_VISIBLE_STORIES
+});

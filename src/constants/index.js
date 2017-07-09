@@ -22,6 +22,10 @@ export const Oops = {
   JOBS: "OOPS_JOBS"
 };
 
+export const UI = {
+  ADD_VISIBLE_STORIES: "ADD_VISIBLE_STORIES"
+};
+
 export const API = {
   news: "https://hacker-news.firebaseio.com/v0/topstories.json",
   jobs: "https://hacker-news.firebaseio.com/v0/jobstories.json",

@@ -1,6 +1,7 @@
-import { Fetching, Fetched, Oops } from "../constants/";
+import { Fetching, Fetched, Oops, UI } from "../constants/";
 
 export const initialState = {
+  visibleStories: [],
   storyIds: [],
   jobIds: [],
   storyIdsError: false,
@@ -34,67 +35,67 @@ const stories = (state = initialState, action = {}) => {
     case Fetching.STORY: {
       return Object.assign({}, state, {
         stories: {
+          ...state.stories,
           [action.id]: {
             fetching: true,
             error: false
-          },
-          ...state.stories
+          }
         }
       });
     }
     case Fetched.STORY: {
       return Object.assign({}, state, {
         stories: {
+          ...state.stories,
           [action.item.id]: {
-            fetching: false,
-            ...action.item
-          },
-          ...state.stories
+            ...action.item,
+            fetching: false
+          }
         }
       });
     }
     case Oops.STORY: {
       return Object.assign({}, state, {
         stories: {
+          ...state.stories,
           [action.id]: {
             error: true,
             fetching: false
           }
-        },
-        ...state.stories
+        }
       });
     }
     case Fetching.COMMENT: {
       return Object.assign({}, state, {
         comments: {
+          ...state.comments,
           [action.id]: {
             fetching: true,
             error: false
-          },
-          ...state.comments
+          }
         }
       });
     }
     case Fetched.COMMENT: {
       return Object.assign({}, state, {
         comments: {
+          ...state.comments,
           [action.item.id]: {
+            ...action.item,
             fetching: false,
-            ...action.item
-          },
-          ...state.comments
+          }
         }
       });
     }
     case Oops.COMMENT: {
       return Object.assign({}, state, {
         comments: {
+          ...state.comments,
           [action.id]: {
             error: true,
             fetching: false
           }
-        },
-        ...state.comments
+        }
       });
     }
     case Fetching.JOBS: {
@@ -117,34 +118,42 @@ const stories = (state = initialState, action = {}) => {
     case Fetching.JOB: {
       return Object.assign({}, state, {
         jobs: {
+          ...state.jobs,
           [action.id]: {
             fetching: true,
             error: false
-          },
-          ...state.jobs
+          }
         }
       });
     }
     case Fetched.JOB: {
       return Object.assign({}, state, {
         jobs: {
+          ...state.jobs,
           [action.item.id]: {
-            fetching: false,
-            ...action.item
-          },
-          ...state.jobs
+            ...action.item,
+            fetching: false
+          }
         }
       });
     }
     case Oops.JOB: {
       return Object.assign({}, state, {
         jobs: {
+          ...state.jobs,
           [action.id]: {
             error: true,
             fetching: false
           }
-        },
-        ...state.jobs
+        }
+      });
+    }
+    case UI.ADD_VISIBLE_STORIES: {
+      return Object.assign({}, state, {
+        visibleStories: [
+          ...state.visibleStories,
+          state.storyIds[state.visibleStories.length]
+        ]
       });
     }
     default: {
