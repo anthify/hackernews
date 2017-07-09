@@ -1,7 +1,13 @@
 import * as actions from "./index";
 import { Fetching, Fetched, Oops } from "../constants/";
 
-import { topStoriesData, mockedError } from "../../spec/mock_data";
+import {
+  mockIdsData,
+  mockedError,
+  mockedStory,
+  mockedComment,
+  mockedJob
+} from "../../spec/mock_data";
 
 import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
@@ -35,14 +41,14 @@ describe("News", () => {
   describe("Fetch news", () => {
     it("fetches array of news ids", () => {
       const store = mockStore();
-      mockRes(200, topStoriesData);
+      mockRes(200, mockIdsData);
       return store.dispatch(actions.fetchNews()).then(() => {
         const expectedActions = store.getActions();
         expect(expectedActions.length).toBe(2);
         expect(expectedActions).toContainEqual({ type: Fetching.NEWS });
         expect(expectedActions).toContainEqual({
           type: Fetched.NEWS,
-          news: topStoriesData
+          news: mockIdsData
         });
       });
     });
@@ -56,6 +62,162 @@ describe("News", () => {
         expect(expectedActions).toContainEqual({ type: Fetching.NEWS });
         expect(expectedActions).toContainEqual({
           type: Oops.NEWS,
+          error: mockedError
+        });
+      });
+    });
+  });
+});
+
+describe("Story", () => {
+  describe("Fetch story", () => {
+    it("fetches story", () => {
+      const store = mockStore();
+      mockRes(200, mockedStory);
+      return store
+        .dispatch(actions.fetchItem(Fetching.STORY, "id"))
+        .then(() => {
+          const expectedActions = store.getActions();
+          expect(expectedActions.length).toBe(2);
+          expect(expectedActions).toContainEqual({
+            type: Fetching.STORY,
+            id: "id"
+          });
+          expect(expectedActions).toContainEqual({
+            type: Fetched.STORY,
+            item: mockedStory
+          });
+        });
+    });
+
+    it("returns error", () => {
+      const store = mockStore();
+      mockError(mockedError);
+      return store
+        .dispatch(actions.fetchItem(Fetching.STORY, "id"))
+        .then(() => {
+          const expectedActions = store.getActions();
+          expect(expectedActions.length).toBe(2);
+          expect(expectedActions).toContainEqual({
+            type: Fetching.STORY,
+            id: "id"
+          });
+          expect(expectedActions).toContainEqual({
+            type: Oops.STORY,
+            error: mockedError
+          });
+        });
+    });
+  });
+});
+
+describe("Comment", () => {
+  describe("Fetch comment", () => {
+    it("fetches comment", () => {
+      const store = mockStore();
+      mockRes(200, mockedComment);
+      return store
+        .dispatch(actions.fetchItem(Fetching.COMMENT, "id"))
+        .then(() => {
+          const expectedActions = store.getActions();
+          expect(expectedActions.length).toBe(2);
+          expect(expectedActions).toContainEqual({
+            type: Fetching.COMMENT,
+            id: "id"
+          });
+          expect(expectedActions).toContainEqual({
+            type: Fetched.COMMENT,
+            item: mockedComment
+          });
+        });
+    });
+
+    it("returns error", () => {
+      const store = mockStore();
+      mockError(mockedError);
+      return store
+        .dispatch(actions.fetchItem(Fetching.COMMENT, "id"))
+        .then(() => {
+          const expectedActions = store.getActions();
+          expect(expectedActions.length).toBe(2);
+          expect(expectedActions).toContainEqual({
+            type: Fetching.COMMENT,
+            id: "id"
+          });
+          expect(expectedActions).toContainEqual({
+            type: Oops.COMMENT,
+            error: mockedError
+          });
+        });
+    });
+  });
+});
+
+describe("Jobs", () => {
+  describe("Fetch Jobs", () => {
+    it("fetches array of job ids", () => {
+      const store = mockStore();
+      mockRes(200, mockIdsData);
+      return store.dispatch(actions.fetchJobs()).then(() => {
+        const expectedActions = store.getActions();
+        expect(expectedActions.length).toBe(2);
+        expect(expectedActions).toContainEqual({ type: Fetching.JOBS });
+        expect(expectedActions).toContainEqual({
+          type: Fetched.JOBS,
+          jobs: mockIdsData
+        });
+      });
+    });
+
+    it("returns error", () => {
+      const store = mockStore();
+      mockError(mockedError);
+      return store.dispatch(actions.fetchJobs()).then(() => {
+        const expectedActions = store.getActions();
+        expect(expectedActions.length).toBe(2);
+        expect(expectedActions).toContainEqual({ type: Fetching.JOBS });
+        expect(expectedActions).toContainEqual({
+          type: Oops.JOBS,
+          error: mockedError
+        });
+      });
+    });
+  });
+});
+
+describe("Job", () => {
+  describe("Fetch job", () => {
+    it("fetches job", () => {
+      const store = mockStore();
+      mockRes(200, mockedJob);
+      return store.dispatch(actions.fetchItem(Fetching.JOB, "id"))
+        .then(() => {
+        const expectedActions = store.getActions();
+        expect(expectedActions.length).toBe(2);
+        expect(expectedActions).toContainEqual({
+          type: Fetching.JOB,
+          id: "id"
+        });
+        expect(expectedActions).toContainEqual({
+          type: Fetched.JOB,
+          item: mockedJob
+        });
+      });
+    });
+
+    it("returns error", () => {
+      const store = mockStore();
+      mockError(mockedError);
+      return store.dispatch(actions.fetchItem(Fetching.JOB, "id"))
+        .then(() => {
+        const expectedActions = store.getActions();
+        expect(expectedActions.length).toBe(2);
+        expect(expectedActions).toContainEqual({
+          type: Fetching.JOB,
+          id: "id"
+        });
+        expect(expectedActions).toContainEqual({
+          type: Oops.JOB,
           error: mockedError
         });
       });
