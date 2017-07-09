@@ -1,10 +1,3 @@
-export const Fetch = {
-  NEWS: "FETCH_NEWS",
-  STORY: "FETCH_STORY",
-  COMMENT: "FETCH_COMMENT",
-  JOB: "FETCH_JOB"
-};
-
 export const Fetching = {
   NEWS: "FETCHING_NEWS",
   STORY: "FETCHING_STORY",
