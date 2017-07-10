@@ -19,6 +19,9 @@ import {
 import stories from "./reducers/stories";
 
 import Stories from "./containers/Stories";
+import Comments from "./containers/Comments";
+
+import { Colors } from "./constants";
 
 import "./index.css";
 
@@ -34,7 +37,7 @@ const store = createStore(
 );
 
 const AppWrapper = styled.div`
-  background-image: linear-gradient(to bottom right, #02b3e4, #02ccba);
+  background: ${Colors.background};
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -43,12 +46,13 @@ const AppWrapper = styled.div`
 `;
 
 const AppViewPort = styled.div`
+  background: ${Colors.light};
   width: 400px;
   height: 670px;
-  overflow-y:scroll;
+  overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
   border-radius: 5px;
-  box-shadow: 5px 5px 25px 0px rgba(46,61,73,0.2);
+  box-shadow: 5px 5px 25px 0px rgba(46, 61, 73, 0.2);
 `;
 
 ReactDOM.render(
@@ -57,6 +61,8 @@ ReactDOM.render(
       <AppWrapper>
         <AppViewPort>
           <Route exact path="/" component={Stories} />
+          <Route exact path="/comments/:id" component={Comments} />
+          <Route exact path="/comments/:id/:comment" component={Comments} />
         </AppViewPort>
       </AppWrapper>
     </ConnectedRouter>

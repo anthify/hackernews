@@ -14,18 +14,19 @@ class Stories extends Component {
   }
 
   moreStories() {
-    return (
-      this.props.stories.visibleStories.length ===
-      this.props.stories.storyIds.length
-    );
+    const { visibleStories, stories } = this.props.stories;
+    const lastStory = stories[visibleStories[visibleStories.length - 1]] || {};
+    if (lastStory.fetching) {
+      return false;
+    }
+    return true;
   }
 
   displayStories() {
     const { dispatch } = this.props;
     if (this.moreStories()) {
-      return;
+      dispatch(addVisibleStories());
     }
-    dispatch(addVisibleStories());
   }
 
   fetchStory(id) {
@@ -33,16 +34,21 @@ class Stories extends Component {
     dispatch(fetchItem(Fetching.STORY, id));
   }
 
+  pushHandler(path) {
+    this.props.history.push(path);
+  }
+
   render() {
     return (
       <InfiniteScroll
-        pageStart={0}
+        initialLoad={(this.props.stories.storyIds.length > 1)}
+        pageStart={10}
         loadMore={this.displayStories.bind(this)}
-        hasMore={!this.moreStories()}
+        hasMore={this.moreStories()}
         loader={<div className="loader">Loading ...</div>}
         useWindow={false}
       >
-        <ItemList {...this.props} fetchStory={this.fetchStory.bind(this)} />
+        <ItemList {...this.props} push={this.pushHandler.bind(this)} fetchStory={this.fetchStory.bind(this)} />
       </InfiniteScroll>
     )
   }

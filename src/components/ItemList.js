@@ -12,7 +12,7 @@ export const ItemList = props => {
     <ItemListWrapper>
       {props.stories.visibleStories.map(i => {
         return (
-          <Item key={i} id={i} fetchStory={props.fetchStory} story={props.stories.stories[i]} />
+          <Item key={i} id={i} fetchStory={props.fetchStory} push={props.push} story={props.stories.stories[i]} />
         )
       })}
     </ItemListWrapper>

@@ -1,25 +1,26 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import { Colors } from "../constants";
 
 const ItemWrapper = styled.div`
-  background: white;
+  background: ${Colors.light};
   margin: 20px 10px;
-  box-shadow: 5px 5px 25px 0px rgba(46,61,73,0.2);
+  box-shadow: 5px 5px 25px 0px rgba(46, 61, 73, 0.2);
   border-radius: 10px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 `;
 
 const Title = styled.div`
   width: 100%;
-  background: #8db013;
-  // padding: 20px;
+  background: ${Colors.primary};
   h1 {
     padding: 20px 10px;
     color: white;
     margin: 0;
-    font-size: 20px;
+    font-size: 18px;
   }
 `;
 
@@ -29,7 +30,7 @@ const InfoBar = styled.div`
 `;
 
 class Item extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchStory(this.props.id);
   }
 
@@ -42,7 +43,7 @@ class Item extends Component {
         </Title>
         <InfoBar>
           <span>{ story.score } point </span>
-          <span>{ story.kids ? story.kids.length : '0' } comments </span>
+          <span>{ story.descendants === 1 ? `${story.descendants} comment` : `${story.descendants} comments` }</span>
         </InfoBar>
       </div>
     )
@@ -53,12 +54,11 @@ class Item extends Component {
   }
 
   render() {
-    console.log(this.props.story);
     if (!this.props.story) {
       return this.renderLoader();
     }
     return (
-      <ItemWrapper>
+      <ItemWrapper onClick={() => this.props.push(`/comments/${this.props.id}`)}>
         { this.props.story.fetching ? this.renderLoader() : this.renderItem() }
       </ItemWrapper>
     )

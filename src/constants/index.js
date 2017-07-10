@@ -31,3 +31,13 @@ export const API = {
   jobs: "https://hacker-news.firebaseio.com/v0/jobstories.json",
   item: id => `https://hacker-news.firebaseio.com/v0/item/${id}.json`
 };
+
+export const Colors = {
+  background: "#05668D",
+  dark: "#1D3557",
+  title: "F0F3BD",
+  light: "#F1FAEE",
+  primary: "#E63946",
+  secondary: "#00A896",
+  action: "#02C39A"
+};

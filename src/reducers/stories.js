@@ -24,6 +24,7 @@ const stories = (state = initialState, action = {}) => {
     case Fetched.NEWS: {
       return Object.assign({}, state, {
         storyIds: action.news,
+        visibleStories: [ ...action.news.splice(0,9) ],
         fetchingStories: false
       });
     }
@@ -82,7 +83,7 @@ const stories = (state = initialState, action = {}) => {
           ...state.comments,
           [action.item.id]: {
             ...action.item,
-            fetching: false,
+            fetching: false
           }
         }
       });
