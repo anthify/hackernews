@@ -12,6 +12,7 @@ const StoryTitle = styled.div`
   background: ${Colors.primary};
   color: ${Colors.light};
   padding: 0px 0px 20px 0px;
+  word-wrap: break-word;
   h1 {
     padding: 20px;
     margin: 0;
@@ -32,6 +33,15 @@ const StoryTitle = styled.div`
     margin: 20px 20px 0px;
     display: block;
     text-align: center;
+  }
+  p {
+    background: ${Colors.action};
+    display: inline-block;
+    margin: 20px 20px 0px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: bold;
   }
 `;
 
@@ -72,6 +82,10 @@ class Comments extends Component {
   renderComments(kids, id, storyId) {
     const { comments } = this.props.stories;
     if (id) {
+      if (!comments[id]) {
+        this.getCommentAndReplies(id);
+        return this.renderLoader();
+      }
       if (comments[id].fetching) {
         return this.renderLoader();
       }
@@ -119,7 +133,8 @@ class Comments extends Component {
           <h3>
             by {story.by} {moment.unix(story.time).startOf("hour").fromNow()}
           </h3>
-          <a href={story.url} target="_blank">Go to story</a>
+          <p>{story.score} points</p>
+          {story.url ? <a href={story.url} target="_blank">Go to story</a> : null}
         </StoryTitle>
         { story.descendants ? this.renderComments(story.kids, comment, id) : <div>No comments...</div> }
       </div>

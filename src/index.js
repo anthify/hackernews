@@ -13,13 +13,15 @@ import thunkMiddleware from "redux-thunk";
 import {
   ConnectedRouter,
   routerReducer,
-  routerMiddleware
+  routerMiddleware,
+  push
 } from "react-router-redux";
 
 import stories from "./reducers/stories";
 
 import Stories from "./containers/Stories";
 import Comments from "./containers/Comments";
+import Header from "./containers/Header";
 
 import { Colors } from "./constants";
 
@@ -49,10 +51,18 @@ const AppViewPort = styled.div`
   background: ${Colors.light};
   width: 400px;
   height: 670px;
+  border-radius: 5px;
+  box-shadow: 5px 21px 31px 0px rgba(46, 61, 73, 0.2);
+  position: relative;
+  overflow: hidden;
+`;
+
+const Content = styled.div`
+  width: 100%;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
-  border-radius: 5px;
-  box-shadow: 5px 5px 25px 0px rgba(46, 61, 73, 0.2);
+  margin-top: 70px;
+  height: calc(670px - 70px);
 `;
 
 ReactDOM.render(
@@ -60,10 +70,13 @@ ReactDOM.render(
     <ConnectedRouter history={history}>
       <AppWrapper>
         <AppViewPort>
-          <Route exact path="/" component={Stories} />
-          <Route exact path="/comments/:id" component={Comments} />
-          <Route exact path="/comments/:id/:comment" component={Comments} />
-        </AppViewPort>
+          <Route exact path="/*" component={Header} />
+          <Content>
+            <Route exact path="/" component={Stories} />
+            <Route exact path="/comments/:id" component={Comments} />
+            <Route exact path="/comments/:id/:comment" component={Comments} />
+          </Content>
+      </AppViewPort>
       </AppWrapper>
     </ConnectedRouter>
   </Provider>,
