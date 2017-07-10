@@ -37,7 +37,9 @@ class Item extends Component {
     const { story } = this.props;
     return (
       <div>
-        <Title><h1>{ story.title }</h1></Title>
+        <Title>
+          <h1>{ story.title }</h1>
+        </Title>
         <InfoBar>
           <span>{ story.score } point </span>
           <span>{ story.kids ? story.kids.length : '0' } comments </span>
