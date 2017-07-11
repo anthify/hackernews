@@ -58,7 +58,7 @@ class Item extends Component {
       <div>
         <Title>
           <h1>{ story.title }</h1>
-          <h3>{story.by} {moment.unix(story.time).startOf("hour").fromNow()}</h3>
+          <h3>by {story.by} {moment.unix(story.time).startOf("hour").fromNow()}</h3>
         </Title>
         <InfoBar>
           <span>{ story.score } point </span>

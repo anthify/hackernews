@@ -34,7 +34,7 @@ export const API = {
 
 export const Colors = {
   hackernews: "#ff811e",
-  background: "#05668D",
+  background: "#006295",
   dark: "#1D3557",
   title: "F0F3BD",
   light: "#F1FAEE",
