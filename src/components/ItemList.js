@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import Item from "./Item";
+import { Colors } from "../constants";
 
 const ItemListWrapper = styled.div`
-  background: white;
+  background: ${Colors.light};
   padding: 10px;
 `;
 

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Loader } from "./Loader";
 import styled from "styled-components";
 import { Colors } from "../constants";
 import moment from "moment";
@@ -68,7 +69,7 @@ class Item extends Component {
   }
 
   renderLoader() {
-    return <p>Loading story... </p>
+    return <Loader />;
   }
 
   render() {

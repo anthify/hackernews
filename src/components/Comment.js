@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Colors } from "../constants";
+import { Loader } from "../components/Loader";
 import styled from "styled-components";
 
 const CommentWrapper = styled.div`
@@ -81,7 +82,7 @@ class Comment extends Component {
     const comment = this.props[this.props.commentId];
     const { storyId, parentComment } = this.props;
     if (!comment) {
-      return <div>Loading...</div>
+      return <Loader />
     }
     return (
       <CommentWrapper>

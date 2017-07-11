@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import moment from "moment";
 import styled from "styled-components";
 import Comment from "../components/Comment";
+import { Loader } from "../components/Loader";
 
 const StoryTitle = styled.div`
   width: 100%;
@@ -65,7 +66,7 @@ class Comments extends Component {
   }
 
   renderLoader() {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   fetchComment(id) {
@@ -133,7 +134,9 @@ class Comments extends Component {
           <h3>
             by {story.by} {moment.unix(story.time).startOf("hour").fromNow()}
           </h3>
-          <p>{story.score} points</p>
+          <p>
+            {story.score} points
+          </p>
           {story.url ? <a href={story.url} target="_blank">Go to story</a> : null}
         </StoryTitle>
         { story.descendants ? this.renderComments(story.kids, comment, id) : <div>No comments...</div> }
@@ -142,4 +145,9 @@ class Comments extends Component {
   }
 }
 
-export default connect(state => state)(Comments);
+const mapStateToProps = state => ({
+  stories: state.stories,
+  comments: state.comments
+});
+
+export default connect(mapStateToProps)(Comments);

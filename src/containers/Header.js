@@ -26,7 +26,6 @@ const HeaderWrapper = styled.div`
 class Header extends Component {
 
   render() {
-      console.log(this);
     return (
       <HeaderWrapper onClick={() => this.props.history.push("/")}>
         <h1>HackerNews</h1>
@@ -35,4 +34,4 @@ class Header extends Component {
   }
 };
 
-export default connect(state => state)(Header);
+export default connect()(Header);

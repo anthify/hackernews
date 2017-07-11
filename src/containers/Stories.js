@@ -3,6 +3,7 @@ import { fetchNews, addVisibleStories, fetchItem } from "../actions/";
 import { Fetching } from "../constants/";
 import { connect } from "react-redux";
 import { ItemList } from "../components/ItemList";
+import { Loader } from "../components/Loader";
 import InfiniteScroll from "react-infinite-scroller";
 
 class Stories extends Component {
@@ -45,7 +46,7 @@ class Stories extends Component {
         pageStart={10}
         loadMore={this.displayStories.bind(this)}
         hasMore={this.moreStories()}
-        loader={<div className="loader">Loading ...</div>}
+        loader={<Loader />}
         useWindow={false}
       >
         <ItemList {...this.props} push={this.pushHandler.bind(this)} fetchStory={this.fetchStory.bind(this)} />
@@ -54,4 +55,11 @@ class Stories extends Component {
   }
 }
 
-export default connect(state => state)(Stories);
+const mapStateToProps = (state) => {
+  return {
+    stories: state.stories,
+    visibleStories: state.visibleStories
+  }
+};
+
+export default connect(mapStateToProps)(Stories);
