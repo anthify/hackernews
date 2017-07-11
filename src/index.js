@@ -49,20 +49,28 @@ const AppWrapper = styled.div`
 
 const AppViewPort = styled.div`
   background: ${Colors.light};
-  width: 400px;
-  height: 670px;
-  border-radius: 5px;
+  width: 100vw;
+  height: 100vh;
   box-shadow: 5px 21px 31px 0px rgba(46, 61, 73, 0.2);
   position: relative;
   overflow: hidden;
+  @media only screen and (min-width: 768px) {
+    max-width: 400px;
+    height: 667px;
+    border-radius: 5px;
+  }
 `;
 
 const Content = styled.div`
-  width: 100%;
+  width: 100vw;
+  height: calc(100vh - 70px);
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
   margin-top: 70px;
-  height: calc(670px - 70px);
+  @media only screen and (min-width: 768px) {
+    max-width: 400px;
+    height: calc(667px - 70px);
+  }
 `;
 
 ReactDOM.render(
