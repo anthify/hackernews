@@ -31,6 +31,7 @@ describe("Stories Reducer", () => {
     };
     const expectedState = Object.assign({}, initialState, {
       storyIds: mockIdsData,
+      visibleStories: [...mockIdsData],
       fetchingStories: false
     });
     const reducer = stories(undefined, action);
