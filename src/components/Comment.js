@@ -2,12 +2,18 @@ import React, { Component } from "react";
 import { Colors } from "../constants";
 import { Loader } from "../components/Loader";
 import styled from "styled-components";
+import moment from "moment";
 
 const CommentWrapper = styled.div`
   color: ${Colors.title};
   h2 {
-    color: ${Colors.dark};
+    color: ${Colors.primary};
     font-size: 18px;
+    span {
+      color: ${Colors.dark};
+      font-weight: normal;
+      font-size: 12px;
+    }
   }
   p {
     color: ${Colors.dark};
@@ -16,6 +22,7 @@ const CommentWrapper = styled.div`
     word-wrap: break-word;
     a {
       color: ${Colors.action};
+      font-weight: bold;
     }
   }
 `;
@@ -87,7 +94,7 @@ class Comment extends Component {
     return (
       <CommentWrapper>
         { comment.id == parentComment && parentComment ? <BackButton onClick={() => this.backButtonHandler(comment, storyId)}>Back</BackButton> : null }
-        <h2>{comment.by}</h2>
+        <h2>{comment.by} <span>{moment.unix(comment.time).startOf("hour").fromNow()}</span></h2>
         <p dangerouslySetInnerHTML={{ __html: comment.text }}></p>
         { comment.kids ? this.renderRepliesButton(comment, storyId, parentComment) : null }
       </CommentWrapper>
