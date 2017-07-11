@@ -91,7 +91,7 @@ class Comment extends Component {
   render() {
     const comment = this.props[this.props.commentId];
     const { storyId, parentComment } = this.props;
-    if (!comment) {
+    if (!comment || comment.fetching) {
       return <Loader />
     }
     return (
