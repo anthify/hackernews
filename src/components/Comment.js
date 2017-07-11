@@ -24,6 +24,9 @@ const CommentWrapper = styled.div`
       color: ${Colors.action};
       font-weight: bold;
     }
+    pre {
+      white-space: pre-wrap;
+    }
   }
 `;
 
